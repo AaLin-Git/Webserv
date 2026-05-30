@@ -2,7 +2,7 @@ NAME = webserv
 
 CPP = c++
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++17 -MMD -MP -Iincludes
+CPPFLAGS = -Wall -Wextra -Werror -std=c++17
 CXXFLAGS =  -MMD -MP -Iincludes
 DEBUG_FLAGS = -g3 -fsanitize=address
 
@@ -14,7 +14,7 @@ OBJ_DIR = build
 
 # main, loop
 CORE = \
-	main.cpp
+	main.cpp \
 
 # all cgi files
 CGI = \

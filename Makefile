@@ -24,6 +24,7 @@ CONFIG = \
 
 # http request, http response
 HTTP = \
+	HttpRequest.cpp \
 
 # bytes, socket etc
 NETWORK = \

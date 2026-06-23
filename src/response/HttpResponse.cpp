@@ -27,3 +27,32 @@ HttpResponse::~HttpResponse()
 	std::cout << "HttpResponse Destructor called" << std::endl;
 }
 
+std::string HttpResponse::reasonFor(int code)
+{
+	//I need to filter it out into make, makeError and invalid code
+}
+
+HttpResponse HttpResponse::make(int code, std::string body)
+{
+
+}
+
+HttpResponse HttpResponse::makeError(int code)
+{
+
+}
+
+void HttpResponse::setHeader(const std::string &name,const std::string &value)
+{
+
+}
+
+std::string HttpResponse::getHeader(const std::string &name) const
+{
+
+}
+
+bool HttpResponse::hasHeader(const std::string &name) const
+{
+
+}

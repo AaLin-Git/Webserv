@@ -8,7 +8,7 @@
 class HttpResponse {
 public:
 	int statusCode = 200;
-	std::string statusMessage;
+	std::string statusText;
 	std::map<std::string, std::string> headers;
 	std::string body;
 	HttpResponse();

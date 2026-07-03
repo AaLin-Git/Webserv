@@ -50,17 +50,33 @@ std::string HttpResponse::reasonFor(int code)
 
 HttpResponse HttpResponse::make(int code, std::string body)
 {
+	HttpResponse response;
+	response.body = body;
+	response.statusCode = code;
+	response.statusText = reasonFor(code);
+	return response;
+}
 
+static	std::string errorPage(int code)
+{
+	std::string defaultPage = R"(<html><body><h1>)" + std::to_string(code) + " "
+		+ HttpResponse::reasonFor(code) + R"(</h1></body></html>)";
+	return defaultPage;
 }
 
 HttpResponse HttpResponse::makeError(int code)
 {
-
+	HttpResponse response;
+	response.statusCode = code;
+	response.statusText = reasonFor(code);
+	response.body = errorPage(code);
+	response.setHeader("Content-Type", "text/html");
+	return response;
 }
 
 void HttpResponse::setHeader(const std::string &name,const std::string &value)
 {
-
+	headers[name] = value;
 }
 
 std::string HttpResponse::getHeader(const std::string &name) const

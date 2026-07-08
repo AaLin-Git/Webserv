@@ -6,7 +6,7 @@
 # include <map>
 
 struct CaseInsensitiveLess {
-    bool operator()(const std::string& a, const std::string& b) const
+	bool operator()(const std::string& a, const std::string& b) const
 	{
 		std::string x = a;
 		std::string y = b;
@@ -39,5 +39,7 @@ public:
 	std::string getHeader(const std::string &name) const;
 	bool hasHeader(const std::string &name) const;
 };
+
+std::string toBytes(const HttpResponse& response);
 
 #endif

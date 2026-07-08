@@ -96,3 +96,25 @@ bool HttpResponse::hasHeader(const std::string &name) const
 	auto it = headers.find(name);
 	return it != headers.end();
 }
+
+std::string toBytes(const HttpResponse& response)
+{
+	std::string output;
+	output += "HTTP/1.1 ";
+	output += std::to_string(response.statusCode);
+	output += " ";
+	output += response.statusText;
+	output += "\r\n";
+	for (const auto& h : response.headers)
+	{
+		output += h.first + ": " + h.second + "\r\n";
+	}
+	//if a response already has a Content-Length in its map (a CGI response might), you'd emit it twice. Later you can guard with if (!response.hasHeader("Content-Length"))
+	output += "Content-Length: ";
+	output += std::to_string(response.body.size());
+	output += "\r\n";
+	output += "\r\n";
+	output += response.body;
+	return output;
+}
+

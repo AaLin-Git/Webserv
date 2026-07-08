@@ -13,7 +13,11 @@ HttpResponse& HttpResponse::operator=(const HttpResponse& rhs)
 {
 	if (this != &rhs)
 	{
-		
+		this->statusCode = rhs.statusCode;
+		this->statusText = rhs.statusText;
+		this->headers = rhs.headers;
+		this->body = rhs.body;
+
 	}
 	return (*this);
 }
@@ -23,7 +27,6 @@ HttpResponse::~HttpResponse()
 
 std::string HttpResponse::reasonFor(int code)
 {
-	//I need to filter it out into make, makeError and invalid code
 	static const std::map<int, std::string> lookupTable{
 		{200, "OK"},
 		{201, "Created"},
@@ -81,10 +84,15 @@ void HttpResponse::setHeader(const std::string &name,const std::string &value)
 
 std::string HttpResponse::getHeader(const std::string &name) const
 {
-
+	auto it = headers.find(name);
+	if (it != headers.end())
+		return (it->second);
+	else
+		return ("");
 }
 
 bool HttpResponse::hasHeader(const std::string &name) const
 {
-
+	auto it = headers.find(name);
+	return it != headers.end();
 }

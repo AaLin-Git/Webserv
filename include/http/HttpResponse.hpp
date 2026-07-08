@@ -5,11 +5,28 @@
 # include <string>
 # include <map>
 
+struct CaseInsensitiveLess {
+    bool operator()(const std::string& a, const std::string& b) const
+	{
+		std::string x = a;
+		std::string y = b;
+		for (size_t i = 0; i < x.length(); i++)
+		{
+			x[i] = tolower(static_cast<unsigned char>(x[i]));
+		}
+		for (size_t i = 0; i < y.length(); i++)
+		{
+			y[i] = tolower(static_cast<unsigned char>(y[i]));
+		}
+		return x < y;
+	}
+};
+
 class HttpResponse {
 public:
 	int statusCode = 200;
 	std::string statusText;
-	std::map<std::string, std::string> headers;
+	std::map<std::string, std::string, CaseInsensitiveLess> headers;
 	std::string body;
 	HttpResponse();
 	HttpResponse(const HttpResponse& other);

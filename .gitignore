@@ -4,3 +4,6 @@
 *.o
 *.d
 build/
+
+# Personal planning/design docs (root only — keep www/*.html trackable)
+/*.html
